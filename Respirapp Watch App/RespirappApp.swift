@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct Respirapp_Watch_AppApp: App {
+    //Instância única e global do 
+    @State private var colorScheme = ThemeManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(colorScheme)
         }
     }
 }
