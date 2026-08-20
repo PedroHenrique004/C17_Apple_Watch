@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct Respirapp_Watch_AppApp: App {
-    //Instância única e global do 
+    //Instância única e global das cores do app.
     @State private var colorScheme = ThemeManager()
     
     var body: some Scene {
