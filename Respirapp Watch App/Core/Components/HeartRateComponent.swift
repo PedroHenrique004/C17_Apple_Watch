@@ -8,24 +8,37 @@
 import SwiftUI
 
 struct HeartRateComponent: View {
+    @Environment(ThemeManager.self) private var theme
+    
     @State var bpm: Int
 
     var body: some View {
         HStack(alignment: .lastTextBaseline, spacing: 4) {
-            Text("\(bpm)")
-                .font(.system(size: 64, weight: .semibold, design: .rounded))
-                .foregroundStyle(.white)
+            ZStack {
+                
+                //Base branca
+                Text("\(bpm)")
+                    .font(.system(size: 64, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white)
+                
+                //Cor do app
+                Text("\(bpm)")
+                    .font(.system(size: 64, weight: .semibold, design: .rounded))
+                    .foregroundStyle(theme.accent.opacity(0.5))
+                
+            }
 
             Text("bpm")
-                .typography(.body, color: .gray)
+                .typography(.body, color: theme.accent.opacity(0.5))
         }
     }
 }
 
 #Preview {
     ZStack {
-        Color(red: 0.07, green: 0.08, blue: 0.13)
+        Color(ThemeManager().ground)
             .ignoresSafeArea()
         HeartRateComponent(bpm: 68)
+            .environment(ThemeManager())
     }
 }
