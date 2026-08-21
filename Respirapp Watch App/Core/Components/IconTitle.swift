@@ -33,9 +33,9 @@ struct IconTitle: View {
                 .opacity(animate ? 0 : 1)
                 .animation(.easeInOut(duration: 0.5), value: animate)
             
-//            Button("Teste") {
-//                animate.toggle()
-//            }
+            Button("Teste") {
+                animate.toggle()
+            }
         }.onAppear {
             animate = true
         }

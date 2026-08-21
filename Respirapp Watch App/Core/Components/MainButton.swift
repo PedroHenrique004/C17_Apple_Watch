@@ -50,6 +50,6 @@ struct MainButton: View {
     MainButton(
         text: "Começar",
         action: nil,
-        icon: nil,
+        icon: "heart",
     ).environment(ThemeManager())
 }
