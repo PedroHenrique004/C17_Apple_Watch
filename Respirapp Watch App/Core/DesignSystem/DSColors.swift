@@ -7,31 +7,43 @@
 
 import SwiftUI
 import Foundation
+import Observation
 
 
 //Design System com as cores que serão utilizadas no projeto.
 
 public extension Color {
+    
+    //MARK: - Conversor para hexadecimal
+    init(hex: String) {
+            let scanner = Scanner(string: hex)
+            var hexNumber: UInt64 = 0
+            scanner.scanHexInt64(&hexNumber)
+            let red = Double((hexNumber & 0xFF0000) >> 16) / 255
+            let green = Double((hexNumber & 0x00FF00) >> 8) / 255
+            let blue = Double(hexNumber & 0x0000FF) / 255
+            self.init(red: red, green: green, blue: blue)
+        }
         
     //MARK:  Conjunto de cor 1 - ROXO
-    static let Pg = Color("161826")
-    static let Ps = Color("232532")
-    static let Pa = Color("9184d9")
+    static let Pg = Color(hex: "161826")
+    static let Ps = Color(hex: "232532")
+    static let Pa = Color(hex: "9184d9")
     
     //MARK:  Conjunto de cor 2 - Azul
-    static let Bg = Color("161d27")
-    static let Bs = Color("242a33")
-    static let Ba = Color("93afd7")
+    static let Bg = Color(hex: "161d27")
+    static let Bs = Color(hex: "242a33")
+    static let Ba = Color(hex: "93afd7")
     
     //MARK:  Conjunto de cor 3 - Vermelho Rosado
-    static let Rg = Color("271619")
-    static let Rs = Color("332426")
-    static let Ra = Color("d7939e")
+    static let Rg = Color(hex: "271619")
+    static let Rs = Color(hex: "332426")
+    static let Ra = Color(hex: "d7939e")
     
     //MARK:  Conjunto de cor 4 - Verde
-    static let Gg = Color("16271f")
-    static let Gs = Color("24332b")
-    static let Ga = Color("93d7b5")
+    static let Gg = Color(hex: "16271f")
+    static let Gs = Color(hex: "24332b")
+    static let Ga = Color(hex: "93d7b5")
     
 }
 
@@ -68,7 +80,7 @@ enum AppTheme {
 ///`themeManager.theme = .blue`
 @Observable
 class ThemeManager {
-    var theme: AppTheme = .purple //Por Default será roxo.
+    var theme: AppTheme = .green //Por Default será roxo.
     
     //Cores do fundo
     var ground: Color {
