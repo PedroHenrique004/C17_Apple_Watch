@@ -19,7 +19,7 @@ final class HeartRateViewModel {
     private let healthKitService: HealthKitServiceProtocol
     private let notificationService: NotificationServiceProtocol
     private let monitorHeartRateUseCase: MonitorHeartRateUseCaseProtocol
-
+    
     init(
         healthKitService: HealthKitServiceProtocol = HealthKitService(),
         notificationService: NotificationServiceProtocol = NotificationService(),
@@ -28,23 +28,6 @@ final class HeartRateViewModel {
         self.healthKitService = healthKitService
         self.notificationService = notificationService
         self.monitorHeartRateUseCase = monitorHeartRateUseCase
-    }
-
-    func start() async {
-        await notificationService.requestAuthorization()
-
-        do {
-            try await healthKitService.requestAuthorization()
-        } catch {
-            print(error)
-            return
-        }
-
-        healthKitService.startHeartRateMonitoring { [weak self] bpm in
-            Task { @MainActor in
-                self?.handleHeartRateUpdate(bpm)
-            }
-        }
     }
 
     func stop() {

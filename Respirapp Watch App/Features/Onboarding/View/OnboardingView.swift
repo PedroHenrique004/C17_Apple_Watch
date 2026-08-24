@@ -8,11 +8,49 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    
+    @Environment(ThemeManager.self) private var theme
+    
+    enum page {
+        case welcome
+        case permission
+        case haptics
+        case end
+    }
+
+    @State private var currentPage: page = .welcome
+    
     var body: some View {
-        //Bem vindo e permissões
-        WelcomeOnboardingView()
-        //Teste de haptics
-        //Tela de início do app
+        ZStack {
+            
+            theme.ground.opacity(0.7).ignoresSafeArea()
+            
+            Group {
+                switch currentPage {
+                case .welcome:
+                    WelcomeOnboardingView(
+                        onContinue: {
+                            currentPage = .permission
+                        }
+                    ).transition(.opacity)
+                    
+                case .permission:
+                    OnboardingPermissonView(
+                        onContinue: {
+                            currentPage = .haptics
+                        }
+                    )
+                case .haptics:
+                    OnboardingHaptics(
+                        onContinue: {
+                            currentPage = .end
+                        }
+                    )
+                case .end:
+                    OnboardingEnd()
+                }
+            }
+        }
     }
 }
 

@@ -14,7 +14,7 @@ struct Respirapp_Watch_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OnboardingView()
                 .environment(colorScheme)
         }
     }

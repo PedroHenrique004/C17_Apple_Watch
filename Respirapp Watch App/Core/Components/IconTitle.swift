@@ -11,10 +11,10 @@ struct IconTitle: View {
     
     //MARK: Dependencies
     @Environment(ThemeManager.self) private var theme
-    @State private var animate = false
+    @Binding var animate: Bool
+    
     let text: String
-    
-    
+
     //MARK: View
     var body: some View {
         
@@ -23,28 +23,36 @@ struct IconTitle: View {
             Image(systemName: "checkmark.circle")
                 .symbolEffect(
                     .drawOn.individually,
-                    isActive: animate
+                    isActive: !animate
                 )
                 .foregroundStyle(theme.accent)
                 .typography(.footnote)
             
             Text(text)
                 .typography(.footnote)
-                .opacity(animate ? 0 : 1)
+                .opacity(animate ? 1 : 0)
                 .animation(.easeInOut(duration: 0.5), value: animate)
             
-            Button("Teste") {
-                animate.toggle()
-            }
-        }.onAppear {
-            animate = true
+//            Button("Teste") {
+//                animate.toggle()
+//            }
         }
         
     }
 }
 
+struct PreviewWrapper: View {
+    @State private var animate = false
+
+    var body: some View {
+        IconTitle(
+            animate: $animate,
+            text: "Deu certo!"
+        )
+        .environment(ThemeManager())
+    }
+}
+
 #Preview {
-    IconTitle(
-        text: "Deu certo!"
-    ).environment(ThemeManager())
+    PreviewWrapper()
 }

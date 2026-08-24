@@ -12,6 +12,8 @@ struct WelcomeOnboardingView: View {
     //MARK: Dependencies
     @Environment(ThemeManager.self) private var theme
     
+    var viewModel = OnboardingViewModel()
+    
     var text: String {
         switch theme.theme {
         case .blue:
@@ -25,9 +27,13 @@ struct WelcomeOnboardingView: View {
         }
     }
     
+    //Navegação de tela
+    let onContinue: (() -> Void)?
+    
+    
     var body: some View {
         ZStack (alignment: .top){
-            theme.ground.opacity(0.7).ignoresSafeArea()
+            theme.ground.opacity(0.0).ignoresSafeArea()
             
             //Estrutura de telas
             VStack (alignment: .leading) {
@@ -41,28 +47,33 @@ struct WelcomeOnboardingView: View {
                 //Título
                 Text("Respiro")
                     .typography(.title2)
+                    .padding(.bottom, 4)
                 
-                //Texto estilizáve;
+                //Texto estilizável;
                 ZStack {
-                    Text("Quando seu ritmo subir, eu aviso e já digo o que fazer.")
+                    Text("Você segue o seu dia. Eu fico de olho no seu ritmo.")
                         .typography(.footnote, color: .gray)
                     
-                    Text("Quando seu ritmo subir, eu aviso e já digo o que fazer.")
+                    Text("Você segue o seu dia. Eu fico de olho no seu ritmo.")
                         .typography(.footnote, color: theme.accent.opacity(0.5))
                 }.padding(.bottom, 16)
                 
                 //Botão de continuar
                 MainButton(
-                    text: "Começar",
+                    text: "Continuar",
                     action: {
-                        
+                            if let action = onContinue {
+                            action()
+                        }
                     },
                     icon: nil
                 )
                 
-            }.padding(.top, 48)
-                .padding(.horizontal, 8)
+            }
+            .padding(.top, 40)
+                .padding(.horizontal, 12)
             .ignoresSafeArea()
+            
                 
             
                 
@@ -71,6 +82,8 @@ struct WelcomeOnboardingView: View {
 }
 
 #Preview {
-    WelcomeOnboardingView()
+    WelcomeOnboardingView(
+        onContinue: nil
+    )
         .environment(ThemeManager())
 }

@@ -30,9 +30,9 @@ struct HeartRateView: View {
 
             HeartRateComponent(bpm: viewModel.bpm)
         }
-        .task {
-            await viewModel.start()
-        }
+//        .task {
+//            await viewModel.start()
+//        }
         .onDisappear {
             viewModel.stop()
         }
@@ -41,4 +41,5 @@ struct HeartRateView: View {
 
 #Preview {
     HeartRateView()
+        .environment(ThemeManager())
 }
