@@ -10,7 +10,7 @@ import SwiftUI
 struct HeartRateComponent: View {
     @Environment(ThemeManager.self) private var theme
     
-    @State var bpm: Int
+    let bpm: Int
 
     var body: some View {
         HStack(alignment: .lastTextBaseline, spacing: 4) {
