@@ -7,11 +7,13 @@
 
 import Foundation
 import UserNotifications
+import WatchKit
 
 protocol NotificationServiceProtocol {
     func requestAuthorization() async
     func notifyHeartRateElevated(bpm: Int)
     func notifyHeartRateNormal()
+    func playHaptic(type: WKHapticType)
 }
 
 final class NotificationService: NotificationServiceProtocol {
@@ -25,8 +27,16 @@ final class NotificationService: NotificationServiceProtocol {
             print(error)
         }
     }
+    
+    // MARK: - Haptics
+    func playHaptic(type: WKHapticType) {
+        guard UserPreferencesStore.shared.isHapticsEnabled else { return }
+        WKInterfaceDevice.current().play(type)
+    }
 
     func notifyHeartRateElevated(bpm: Int) {
+        guard UserPreferencesStore.shared.isNotificationsEnabled else { return }
+        
         send(
             title: "Frequência cardíaca elevada",
             body: "Seus batimentos estão em \(bpm) bpm."
@@ -34,6 +44,8 @@ final class NotificationService: NotificationServiceProtocol {
     }
 
     func notifyHeartRateNormal() {
+        guard UserPreferencesStore.shared.isNotificationsEnabled else { return }
+        
         send(
             title: "Frequência cardíaca normalizada",
             body: "Seus batimentos voltaram ao normal."

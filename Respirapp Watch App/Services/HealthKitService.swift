@@ -12,7 +12,7 @@ import HealthKit
 
 protocol HealthKitServiceProtocol: AnyObject {
     func requestAuthorization() async throws
-    func startHeartRateMonitoring(onUpdate: @escaping (Int) -> Void)
+    func startHeartRateMonitoring(onUpdate: @escaping (Int) -> Void, onError: @escaping (String) -> Void)
     func stopHeartRateMonitoring()
 }
 
@@ -28,6 +28,7 @@ final class HealthKitService: NSObject, HealthKitServiceProtocol {
     private var workoutBuilder: HKLiveWorkoutBuilder?
 
     private var onHeartRateUpdate: ((Int) -> Void)?
+    private var onError: ((String) -> Void)?
 
     private var workoutConfiguration: HKWorkoutConfiguration {
         let configuration = HKWorkoutConfiguration()
@@ -55,22 +56,31 @@ final class HealthKitService: NSObject, HealthKitServiceProtocol {
 
     // MARK: - Start / Stop Workout
 
-    func startHeartRateMonitoring(onUpdate: @escaping (Int) -> Void) {
+    func startHeartRateMonitoring(onUpdate: @escaping (Int) -> Void, onError: @escaping (String) -> Void) {
         self.onHeartRateUpdate = onUpdate
+        self.onError = onError
 
         do {
             let session = try HKWorkoutSession(
                 healthStore: healthStore,
                 configuration: workoutConfiguration
             )
+            
+            session.delegate = self
 
             let builder = session.associatedWorkoutBuilder()
 
             builder.delegate = self
-            builder.dataSource = HKLiveWorkoutDataSource(
+            let dataSource = HKLiveWorkoutDataSource(
                 healthStore: healthStore,
                 workoutConfiguration: workoutConfiguration
             )
+            
+            if let heartRateType {
+                dataSource.enableCollection(for: heartRateType, predicate: nil)
+            }
+            
+            builder.dataSource = dataSource
 
             workoutSession = session
             workoutBuilder = builder
@@ -119,11 +129,20 @@ extension HealthKitService: HKLiveWorkoutBuilderDelegate {
         _ workoutBuilder: HKLiveWorkoutBuilder,
         didCollectDataOf collectedTypes: Set<HKSampleType>
     ) {
-        guard
-            let heartRateType,
-            let statistics = workoutBuilder.statistics(for: heartRateType),
-            let quantity = statistics.mostRecentQuantity()
-        else {
+        print("workoutBuilder didCollectDataOf: \(collectedTypes)")
+        
+        guard let heartRateType else {
+            print("heartRateType is nil")
+            return
+        }
+        
+        guard let statistics = workoutBuilder.statistics(for: heartRateType) else {
+            print("No statistics for heart rate")
+            return
+        }
+        
+        guard let quantity = statistics.mostRecentQuantity() else {
+            print("No mostRecentQuantity for heart rate")
             return
         }
 
@@ -137,7 +156,20 @@ extension HealthKitService: HKLiveWorkoutBuilderDelegate {
         let bpm = quantity.doubleValue(
             for: HKUnit.count().unitDivided(by: .minute())
         )
+        
+        print("BPM coletado: \(bpm)")
 
         onHeartRateUpdate?(Int(bpm))
+    }
+}
+
+// MARK: - HKWorkoutSessionDelegate
+extension HealthKitService: HKWorkoutSessionDelegate {
+    func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
+        print("Workout state changed to: \(toState.rawValue)")
+    }
+    
+    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
+        self.onError?(error.localizedDescription)
     }
 }
