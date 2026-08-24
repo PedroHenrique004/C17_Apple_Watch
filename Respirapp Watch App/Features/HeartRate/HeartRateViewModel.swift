@@ -15,6 +15,7 @@ final class HeartRateViewModel {
 
     private(set) var bpm = 0
     private(set) var alertState: HeartRateAlertState = .normal
+    private(set) var errorMessage: String? = nil
 
     private let healthKitService: HealthKitServiceProtocol
     private let notificationService: NotificationServiceProtocol
@@ -30,6 +31,19 @@ final class HeartRateViewModel {
         self.monitorHeartRateUseCase = monitorHeartRateUseCase
     }
 
+    func start() async {
+        healthKitService.startHeartRateMonitoring(onUpdate: { [weak self] bpm in
+            Task { @MainActor in
+                self?.handleHeartRateUpdate(bpm)
+                self?.errorMessage = nil
+            }
+        }, onError: { [weak self] errorMsg in
+            Task { @MainActor in
+                self?.errorMessage = "HealthKit Error: \(errorMsg)"
+            }
+        })
+    }
+    
     func stop() {
         healthKitService.stopHeartRateMonitoring()
     }

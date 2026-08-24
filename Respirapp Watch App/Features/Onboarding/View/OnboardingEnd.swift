@@ -28,7 +28,7 @@ struct OnboardingEnd: View {
                 //Título da tela
                 IconTitle(
                     animate: $animate, text: "Tudo Pronto!")
-                .padding(.bottom, 16)
+                .padding(.bottom, 8)
                 
                 //Batimentos registrados
                 HeartRateComponent(bpm: viewModel.bpm)
@@ -50,7 +50,7 @@ struct OnboardingEnd: View {
                     .font(.system(size: 10))
                     .foregroundStyle(theme.accent.opacity(0.3))
                 
-            }.padding(24)
+            }.padding(.horizontal, 24).padding(.vertical, 16)
 
             
             .onAppear {

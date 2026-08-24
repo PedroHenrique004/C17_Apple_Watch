@@ -29,6 +29,7 @@ struct OnboardingPermissonView: View {
                 .ignoresSafeArea()
             
             //Estrutura da tela
+            ScrollView {
                 VStack (alignment: .leading) {
                     
                     //Ícone
@@ -68,19 +69,18 @@ struct OnboardingPermissonView: View {
                             if viewModel.isPermissionGranted {
                                 
                                 if let action = onContinue {
-                                action()
-                            }
+                                    action()
+                                }
                             }
                         },
                         icon: nil
                     )
                     
                 }.padding(.horizontal, 12)
-                .padding(.top, 32)
                     .ignoresSafeArea()
                     .opacity(opacity ? 1 : 0).animation(.easeInOut(duration: 2), value: opacity)
-                    
-
+            }
+                
             }.onAppear {
             animate = true
             opacity = true

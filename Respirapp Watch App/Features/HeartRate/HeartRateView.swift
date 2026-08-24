@@ -13,7 +13,7 @@ struct HeartRateView: View {
 
     @State private var viewModel = HeartRateViewModel()
     @State private var animateHeart = false
-
+    
     var body: some View {
         VStack {
             Image(systemName: "heart.fill")
@@ -29,6 +29,14 @@ struct HeartRateView: View {
                 .padding(.bottom, 12)
 
             HeartRateComponent(bpm: viewModel.bpm)
+            
+            if let error = viewModel.errorMessage {
+                Text(error)
+                    .font(.system(size: 10))
+                    .foregroundColor(.red)
+                    .multilineTextAlignment(.center)
+                    .padding()
+            }
         }
 //        .task {
 //            await viewModel.start()

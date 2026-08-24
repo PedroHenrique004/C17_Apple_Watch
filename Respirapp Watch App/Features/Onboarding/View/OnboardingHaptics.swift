@@ -29,54 +29,55 @@ struct OnboardingHaptics: View {
                 .ignoresSafeArea()
             
             //Estrutura da tela
-            VStack (alignment: .leading) {
-                
-                //Ícone
-                Image(systemName: "applewatch.radiowaves.left.and.right")
-                    .foregroundStyle(theme.accent)
-                    .typography(.title)
-                    .padding(.bottom, 4)
-                    .symbolEffect(.bounce,
-                                  options: .repeat(2),
-                                  value: animate)
-                
-                //Título principal
-                Text("Dois toques leves no pulso")
-                    .typography(.title3)
-                    .multilineTextAlignment(.leading)
+            ScrollView {
+                VStack (alignment: .leading) {
                     
-                    .padding(.bottom, 4)
-                
-                //Subtítulo
-                ZStack {
+                    //Ícone
+                    Image(systemName: "applewatch.radiowaves.left.and.right")
+                        .foregroundStyle(theme.accent)
+                        .typography(.title)
+                        .padding(.bottom, 4)
+                        .symbolEffect(.bounce,
+                                      options: .repeat(2),
+                                      value: animate)
                     
-                    Text("Te avisamos sem som, sem tela acesa.")
-                        .typography(.footnote, color: .gray)
+                    //Título principal
+                    Text("Dois toques leves no pulso")
+                        .typography(.title3)
+                        .multilineTextAlignment(.leading)
                     
-                    Text("Te avisamos sem som, sem tela acesa.")
-                        .typography(.footnote, color: theme.accent.opacity(0.5))
+                        .padding(.bottom, 4)
                     
-                }.padding(.bottom, 8)
-                
-                //Botão
-                MainButton(
-                    text: "Continuar",
-                    action: {
+                    //Subtítulo
+                    ZStack {
                         
-                        //TODO: haptics
+                        Text("Te avisamos sem som, sem tela acesa.")
+                            .typography(.footnote, color: .gray)
                         
-                        //Isso deve acontecer depois dos haptics
-                        if let action = onContinue {
-                        action()
-                    }
-                    },
-                    icon: nil
-                )
-                
-            }.padding(.horizontal, 12)
-                .padding(.top, 24)
-                .ignoresSafeArea()
-                .opacity(opacity ? 1 : 0).animation(.easeInOut(duration: 2), value: opacity)
+                        Text("Te avisamos sem som, sem tela acesa.")
+                            .typography(.footnote, color: theme.accent.opacity(0.5))
+                        
+                    }.padding(.bottom, 8)
+                    
+                    //Botão
+                    MainButton(
+                        text: "Continuar",
+                        action: {
+                            
+                            //TODO: haptics
+                            
+                            //Isso deve acontecer depois dos haptics
+                            if let action = onContinue {
+                                action()
+                            }
+                        },
+                        icon: nil
+                    )
+                    
+                }.padding(.horizontal, 12)
+                    .ignoresSafeArea()
+                    .opacity(opacity ? 1 : 0).animation(.easeInOut(duration: 2), value: opacity)
+            }
             
         }.onAppear{
             opacity = true

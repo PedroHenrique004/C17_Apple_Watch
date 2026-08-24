@@ -36,44 +36,45 @@ struct WelcomeOnboardingView: View {
             theme.ground.opacity(0.0).ignoresSafeArea()
             
             //Estrutura de telas
-            VStack (alignment: .leading) {
-                
-                //Ícone
-                Image("icon_heart_ecg_" + text)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
-                
-                //Título
-                Text("Respiro")
-                    .typography(.title2)
-                    .padding(.bottom, 4)
-                
-                //Texto estilizável;
-                ZStack {
-                    Text("Você segue o seu dia. Eu fico de olho no seu ritmo.")
-                        .typography(.footnote, color: .gray)
+            ScrollView {
+                VStack (alignment: .leading) {
                     
-                    Text("Você segue o seu dia. Eu fico de olho no seu ritmo.")
-                        .typography(.footnote, color: theme.accent.opacity(0.5))
-                }.padding(.bottom, 16)
-                
-                //Botão de continuar
-                MainButton(
-                    text: "Continuar",
-                    action: {
+                    //Ícone
+                    Image("icon_heart_ecg_" + text)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32, height: 32)
+                    
+                    //Título
+                    Text("Respiro")
+                        .typography(.title2)
+                        .padding(.bottom, 4)
+                    
+                    //Texto estilizável;
+                    ZStack {
+                        Text("Você segue o seu dia. Eu fico de olho no seu ritmo.")
+                            .typography(.footnote, color: .gray)
+                        
+                        Text("Você segue o seu dia. Eu fico de olho no seu ritmo.")
+                            .typography(.footnote, color: theme.accent.opacity(0.5))
+                    }.padding(.bottom, 16)
+                    
+                    //Botão de continuar
+                    MainButton(
+                        text: "Continuar",
+                        action: {
                             if let action = onContinue {
-                            action()
-                        }
-                    },
-                    icon: nil
-                )
-                
-            }
-            .padding(.top, 40)
+                                action()
+                            }
+                        },
+                        icon: nil
+                    )
+                    
+                }
+//                .padding(.top, 40)
                 .padding(.horizontal, 12)
-            .ignoresSafeArea()
-            
+                .ignoresSafeArea()
+            }
                 
             
                 

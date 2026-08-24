@@ -11,6 +11,8 @@ import Observation
 @Observable
 final class OnboardingViewModel {
     
+    private(set) var errorMessage: String? = nil
+    
     private let healthKitService: HealthKitServiceProtocol
     private let notificationService: NotificationServiceProtocol
     
@@ -28,7 +30,7 @@ final class OnboardingViewModel {
             isPermissionGranted = true
         } catch {
             isPermissionGranted = false
-            print(error)
+            self.errorMessage = "Auth Error: \(error.localizedDescription)"
         }
         
         await notificationService.requestAuthorization()
