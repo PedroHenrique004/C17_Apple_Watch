@@ -1,14 +1,6 @@
-//
-//  HeartRateViewModel.swift
-//  Respirapp Watch App
-//
-//  Camada de apresentação: orquestra o HealthKitService, o Use Case
-//  de monitoramento e o NotificationService, expondo um estado simples
-//  para a HeartRateView consumir.
-//
-
 import Foundation
 import Observation
+import WidgetKit
 
 @Observable
 final class HeartRateViewModel {
@@ -21,6 +13,8 @@ final class HeartRateViewModel {
     private let notificationService: NotificationServiceProtocol
     private let monitorHeartRateUseCase: MonitorHeartRateUseCaseProtocol
     
+    private let appGroupID = "group.dev.pedrosantos.Respirapp"
+
     init(
         healthKitService: HealthKitServiceProtocol = HealthKitService(),
         notificationService: NotificationServiceProtocol = NotificationService(),
@@ -56,6 +50,9 @@ final class HeartRateViewModel {
         let newState = monitorHeartRateUseCase.evaluate(bpm: currentBPM, currentState: previousState)
         alertState = newState
 
+        // --- ATUALIZAÇÃO DO WIDGET ---
+        updateWidgetData(currentBPM: currentBPM)
+
         guard newState.isElevated != previousState.isElevated else {
             return
         }
@@ -64,6 +61,50 @@ final class HeartRateViewModel {
             notificationService.notifyHeartRateElevated(bpm: currentBPM)
         } else {
             notificationService.notifyHeartRateNormal()
+        }
+    }
+        
+    @MainActor
+    private func updateWidgetData(currentBPM: Int) {
+        guard let sharedDefaults = UserDefaults(suiteName: appGroupID) else { return }
+        
+        let state = calculateState(bpm: currentBPM)
+        let quote = getIncentiveQuote(for: state)
+        
+        sharedDefaults.set(state, forKey: "widgetState")
+        sharedDefaults.set(currentBPM, forKey: "widgetBPM")
+        sharedDefaults.set(quote, forKey: "widgetQuote")
+        
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+    
+    private func calculateState(bpm: Int) -> String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        let isNightTime = hour >= 22 || hour < 6
+        
+        if bpm < 60 && isNightTime {
+            return "Hora de dormir"
+        } else if bpm < 75 {
+            return "Relaxado"
+        } else if bpm <= 95 {
+            return "Moderado"
+        } else {
+            return "Elevado"
+        }
+    }
+    
+    private func getIncentiveQuote(for state: String) -> String {
+        switch state {
+        case "Hora de dormir":
+            return "Seu corpo está desacelerando. Tenha uma ótima noite!"
+        case "Relaxado":
+            return "Você está se saindo bem! Mantenha a calma."
+        case "Moderado":
+            return "Ritmo estável. Continue respirando fundo."
+        case "Elevado":
+            return "Que tal fazer uma pausa para respirar agora?"
+        default:
+            return "Mantenha o foco na sua respiração."
         }
     }
 }
