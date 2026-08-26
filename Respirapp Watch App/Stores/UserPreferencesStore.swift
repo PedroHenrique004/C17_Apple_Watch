@@ -32,16 +32,31 @@ class UserPreferencesStore: ObservableObject {
         }
     }
     
+    var actualColor: AppTheme {
+        willSet {
+            objectWillChange.send()
+        }
+        didSet {
+            UserDefaults.standard.set(actualColor.rawValue, forKey: "actualColor")
+        }
+    }
+    
     private init() {
 
         UserDefaults.standard.register(defaults: [
             "isNotificationsEnabled": true,
             "isHapticsEnabled": true,
-            "hasCompletedOnboarding": false
+            "hasCompletedOnboarding": false,
+            "actualColor": AppTheme.purple.rawValue
         ])
         
         self.isNotificationsEnabled = UserDefaults.standard.bool(forKey: "isNotificationsEnabled")
         self.isHapticsEnabled = UserDefaults.standard.bool(forKey: "isHapticsEnabled")
         self.hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
+        self.actualColor = AppTheme(
+            rawValue: UserDefaults.standard.string(
+                forKey: "actualColor"
+            ) ?? AppTheme.purple.rawValue
+        ) ?? .purple
     }
 }
