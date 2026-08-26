@@ -20,7 +20,7 @@ final class HeartRateViewModel {
     private let healthKitService: HealthKitServiceProtocol
     private let notificationService: NotificationServiceProtocol
     private let monitorHeartRateUseCase: MonitorHeartRateUseCaseProtocol
-
+    
     init(
         healthKitService: HealthKitServiceProtocol = HealthKitService(),
         notificationService: NotificationServiceProtocol = NotificationService(),
@@ -32,15 +32,6 @@ final class HeartRateViewModel {
     }
 
     func start() async {
-        await notificationService.requestAuthorization()
-
-        do {
-            try await healthKitService.requestAuthorization()
-        } catch {
-            self.errorMessage = "Auth Error: \(error.localizedDescription)"
-            return
-        }
-
         healthKitService.startHeartRateMonitoring(onUpdate: { [weak self] bpm in
             Task { @MainActor in
                 self?.handleHeartRateUpdate(bpm)
@@ -52,7 +43,7 @@ final class HeartRateViewModel {
             }
         })
     }
-
+    
     func stop() {
         healthKitService.stopHeartRateMonitoring()
     }

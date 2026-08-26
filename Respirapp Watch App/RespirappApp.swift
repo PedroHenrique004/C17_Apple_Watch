@@ -11,11 +11,18 @@ import SwiftUI
 struct Respirapp_Watch_AppApp: App {
     //Instância única e global das cores do app.
     @State private var colorScheme = ThemeManager()
+    var finishOnboarding = UserPreferencesStore.shared.hasCompletedOnboarding
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(colorScheme)
+            if !finishOnboarding {
+                OnboardingView()
+                    .environment(colorScheme)
+            } else {
+                AppNavigationView()
+                    .environment(colorScheme)
+            }
+            
         }
     }
 }

@@ -37,7 +37,6 @@ struct SettingsView: View {
             .padding(.top, 8)
             .padding(.bottom, 24)
         }
-        .background(theme.ground.ignoresSafeArea())
         .navigationTitle("Ajustes")
         .navigationBarTitleDisplayMode(.inline)
     }

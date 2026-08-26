@@ -80,7 +80,7 @@ enum AppTheme {
 ///`themeManager.theme = .blue`
 @Observable
 class ThemeManager {
-    var theme: AppTheme = .blue //Por Default será roxo.
+    var theme: AppTheme = .rose //Por Default será roxo.
     
     //Cores do fundo
     var ground: Color {

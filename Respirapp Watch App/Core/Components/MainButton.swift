@@ -43,6 +43,7 @@ struct MainButton: View {
                     lineWidth: 1
                     )
             )
+            .frame(maxWidth: .infinity)
     }
 }
 
