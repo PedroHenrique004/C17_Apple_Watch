@@ -1,76 +1,71 @@
-//
-//  ActivityButton.swift
-//  Respirapp Watch App
-//
-//  Created by Micael Martins de Moura on 21/08/26.
-//
-
 import SwiftUI
 
+/// Botão reutilizável usado por cada item da lista de atividades.
+/// O conteúdo e o estado visual são recebidos da tela que o utiliza.
 struct ActivityButton: View {
-    
-    //MARK: Dependencies
-    
+    /// Tema global; fornece as cores que acompanham a escolha do usuário.
     @Environment(ThemeManager.self) private var theme
-    
-    @State var isActive = true
-    
+
+    /// Título principal da atividade.
     let text: String
+    /// Instrução curta exibida sob o título.
     let subtitle: String
-    let activeSubtitle = "Melhor Agora"
+    /// Nome do asset do ícone já adequado ao tema ou ao estado inativo.
     let icon: String
-    let activeIcon: String
+    /// Define se o item é a recomendação destacada da lista.
+    let isHighlighted: Bool
+    /// Ação executada quando a pessoa escolhe a atividade.
     let action: (() -> Void)?
-    
-    //MARK: View
+
     var body: some View {
-        Button {
-            if let action = action {
-                action()
-            }
-        } label: {
-            
-            //Ícone e Texo
-            HStack (spacing: 16){
+        // A ação é opcional para permitir uso em previews e estados estáticos.
+        Button(action: { action?() }) {
+            HStack(spacing: 9) {
                 Image(icon)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 32, height: 32)
-                //Texto
-                VStack (alignment: .leading){
+                    .frame(width: 22, height: 22)
+
+                VStack(alignment: .leading, spacing: 2) {
                     Text(text)
-                        .typography(.callout, color: .white )
-                    
-                    Text(isActive ? activeSubtitle: subtitle)
-                        .typography(.footnote, color: isActive ? theme.accent : .gray)
-                        .multilineTextAlignment(.leading)
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                    Text(subtitle)
+                        .font(.system(size: 11, weight: .regular, design: .rounded))
+                        .foregroundStyle(isHighlighted ? theme.accent : .gray)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
                 }
+
+                Spacer(minLength: 0)
             }
-        }.foregroundStyle(
-            isActive ?
-            theme.accent.opacity(0.7) :
-                theme.accent.opacity(0.4)
-        ).overlay(
-            RoundedRectangle(
-                cornerRadius: 999
-            ).stroke(
-                theme.accent.opacity(isActive ? 1 : 0),
-                lineWidth: 1
-                
-            )
-        )
-        
+            .padding(.horizontal, 10)
+            .padding(.vertical, 7)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            // Mantém cada linha compacta e confortável no Apple Watch.
+            .frame(minHeight: 44)
+            .background(theme.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 18))
+            // Apenas o item recomendado ganha borda na cor do tema.
+            .overlay {
+                RoundedRectangle(cornerRadius: 18)
+                    .stroke(theme.accent.opacity(isHighlighted ? 1 : 0), lineWidth: 1)
+            }
+        }
+        // Evita que o estilo padrão do watchOS aumente a altura do componente.
+        .buttonStyle(.plain)
     }
 }
 
 #Preview {
     ActivityButton(
         text: "Respiração",
-        subtitle: "Respire fundo",
-        icon: "Icon_wind_gray",
-        activeIcon: "Icon_wind_gray",
+        subtitle: "Melhor agora",
+        icon: "Icon_wind_green",
+        isHighlighted: true,
         action: {}
     )
-        .environment(ThemeManager())
+    .environment(ThemeManager())
 }
-
