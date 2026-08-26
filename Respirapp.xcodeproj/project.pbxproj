@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3D3F09933036234200BC9108 /* Respirapp Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3D3F09923036234200BC9108 /* Respirapp Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3D3F0D2C303F678C00BC9108 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3F0D2B303F678C00BC9108 /* WidgetKit.framework */; };
+		3D3F0D2E303F678C00BC9108 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3F0D2D303F678C00BC9108 /* SwiftUI.framework */; };
+		3D3F0D39303F678E00BC9108 /* RespirappWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3D3F0D29303F678C00BC9108 /* RespirappWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +35,13 @@
 			remoteGlobalIDString = 3D3F09913036234200BC9108;
 			remoteInfo = "Respirapp Watch App";
 		};
+		3D3F0D37303F678E00BC9108 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3D3F09863036234100BC9108 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D3F0D28303F678C00BC9108;
+			remoteInfo = RespirappWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +56,17 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3D3F0D3E303F678E00BC9108 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3D3F0D39303F678E00BC9108 /* RespirappWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +74,21 @@
 		3D3F09923036234200BC9108 /* Respirapp Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Respirapp Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3F09A13036234400BC9108 /* Respirapp Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Respirapp Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3F09AB3036234400BC9108 /* Respirapp Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Respirapp Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D3F0D29303F678C00BC9108 /* RespirappWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RespirappWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D3F0D2B303F678C00BC9108 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		3D3F0D2D303F678C00BC9108 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		3D3F0D3F303F67A700BC9108 /* RespirappWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RespirappWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3D3F0D3A303F678E00BC9108 /* Exceptions for "RespirappWidget" folder in "RespirappWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3D3F0D28303F678C00BC9108 /* RespirappWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3D3F09963036234200BC9108 /* Respirapp Watch App */ = {
@@ -69,6 +104,14 @@
 		3D3F09AE3036234400BC9108 /* Respirapp Watch AppUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Respirapp Watch AppUITests";
+			sourceTree = "<group>";
+		};
+		3D3F0D2F303F678C00BC9108 /* RespirappWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3D3F0D3A303F678E00BC9108 /* Exceptions for "RespirappWidget" folder in "RespirappWidgetExtension" target */,
+			);
+			path = RespirappWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -95,15 +138,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3D3F0D26303F678C00BC9108 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D3F0D2E303F678C00BC9108 /* SwiftUI.framework in Frameworks */,
+				3D3F0D2C303F678C00BC9108 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		3D3F09853036234100BC9108 = {
 			isa = PBXGroup;
 			children = (
+				3D3F0D3F303F67A700BC9108 /* RespirappWidgetExtension.entitlements */,
 				3D3F09963036234200BC9108 /* Respirapp Watch App */,
 				3D3F09A43036234400BC9108 /* Respirapp Watch AppTests */,
 				3D3F09AE3036234400BC9108 /* Respirapp Watch AppUITests */,
+				3D3F0D2F303F678C00BC9108 /* RespirappWidget */,
+				3D3F0D2A303F678C00BC9108 /* Frameworks */,
 				3D3F098D3036234200BC9108 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -115,8 +170,18 @@
 				3D3F09923036234200BC9108 /* Respirapp Watch App.app */,
 				3D3F09A13036234400BC9108 /* Respirapp Watch AppTests.xctest */,
 				3D3F09AB3036234400BC9108 /* Respirapp Watch AppUITests.xctest */,
+				3D3F0D29303F678C00BC9108 /* RespirappWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3D3F0D2A303F678C00BC9108 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D3F0D2B303F678C00BC9108 /* WidgetKit.framework */,
+				3D3F0D2D303F678C00BC9108 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,10 +213,12 @@
 				3D3F098E3036234200BC9108 /* Sources */,
 				3D3F098F3036234200BC9108 /* Frameworks */,
 				3D3F09903036234200BC9108 /* Resources */,
+				3D3F0D3E303F678E00BC9108 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3D3F0D38303F678E00BC9108 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				3D3F09963036234200BC9108 /* Respirapp Watch App */,
@@ -209,6 +276,28 @@
 			productReference = 3D3F09AB3036234400BC9108 /* Respirapp Watch AppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		3D3F0D28303F678C00BC9108 /* RespirappWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D3F0D3B303F678E00BC9108 /* Build configuration list for PBXNativeTarget "RespirappWidgetExtension" */;
+			buildPhases = (
+				3D3F0D25303F678C00BC9108 /* Sources */,
+				3D3F0D26303F678C00BC9108 /* Frameworks */,
+				3D3F0D27303F678C00BC9108 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3D3F0D2F303F678C00BC9108 /* RespirappWidget */,
+			);
+			name = RespirappWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = RespirappWidgetExtension;
+			productReference = 3D3F0D29303F678C00BC9108 /* RespirappWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -233,6 +322,9 @@
 						CreatedOnToolsVersion = 26.6;
 						TestTargetID = 3D3F09913036234200BC9108;
 					};
+					3D3F0D28303F678C00BC9108 = {
+						CreatedOnToolsVersion = 26.6;
+					};
 				};
 			};
 			buildConfigurationList = 3D3F09893036234100BC9108 /* Build configuration list for PBXProject "Respirapp" */;
@@ -253,6 +345,7 @@
 				3D3F09913036234200BC9108 /* Respirapp Watch App */,
 				3D3F09A03036234400BC9108 /* Respirapp Watch AppTests */,
 				3D3F09AA3036234400BC9108 /* Respirapp Watch AppUITests */,
+				3D3F0D28303F678C00BC9108 /* RespirappWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -286,6 +379,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3D3F0D27303F678C00BC9108 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -310,6 +410,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3D3F0D25303F678C00BC9108 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -327,6 +434,11 @@
 			isa = PBXTargetDependency;
 			target = 3D3F09913036234200BC9108 /* Respirapp Watch App */;
 			targetProxy = 3D3F09AC3036234400BC9108 /* PBXContainerItemProxy */;
+		};
+		3D3F0D38303F678E00BC9108 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D3F0D28303F678C00BC9108 /* RespirappWidgetExtension */;
+			targetProxy = 3D3F0D37303F678E00BC9108 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -455,7 +567,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Respirapp Watch App/Respirapp Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P5F7RZ3877;
+				DEVELOPMENT_TEAM = HG54MS3295;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Respirapp;
@@ -469,7 +581,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.pedrosantos.stoopbrain.Respirapp.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pedrosantos.Respirapp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -492,7 +604,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Respirapp Watch App/Respirapp Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P5F7RZ3877;
+				DEVELOPMENT_TEAM = HG54MS3295;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Respirapp;
@@ -506,7 +618,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.pedrosantos.stoopbrain.Respirapp.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pedrosantos.Respirapp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -527,7 +639,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P5F7RZ3877;
+				DEVELOPMENT_TEAM = HG54MS3295;
 				INFOPLIST_KEY_CFBundleDisplayName = Respirapp;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
@@ -545,7 +657,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P5F7RZ3877;
+				DEVELOPMENT_TEAM = HG54MS3295;
 				INFOPLIST_KEY_CFBundleDisplayName = Respirapp;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
@@ -565,7 +677,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P5F7RZ3877;
+				DEVELOPMENT_TEAM = HG54MS3295;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.pedrosantos.stoopbrain.Respirapp-Watch-AppTests";
@@ -588,7 +700,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P5F7RZ3877;
+				DEVELOPMENT_TEAM = HG54MS3295;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.pedrosantos.stoopbrain.Respirapp-Watch-AppTests";
@@ -611,7 +723,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P5F7RZ3877;
+				DEVELOPMENT_TEAM = HG54MS3295;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.pedrosantos.stoopbrain.Respirapp-Watch-AppUITests";
@@ -633,7 +745,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P5F7RZ3877;
+				DEVELOPMENT_TEAM = HG54MS3295;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.pedrosantos.stoopbrain.Respirapp-Watch-AppUITests";
@@ -648,6 +760,75 @@
 				TEST_TARGET_NAME = "Respirapp Watch App";
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		3D3F0D3C303F678E00BC9108 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RespirappWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HG54MS3295;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RespirappWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RespirappWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pedrosantos.Respirapp.watchkitapp.RespirappWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		3D3F0D3D303F678E00BC9108 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RespirappWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HG54MS3295;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RespirappWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RespirappWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pedrosantos.Respirapp.watchkitapp.RespirappWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
 			};
 			name = Release;
 		};
@@ -695,6 +876,15 @@
 			buildConfigurations = (
 				3D3F09C03036234400BC9108 /* Debug */,
 				3D3F09C13036234400BC9108 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D3F0D3B303F678E00BC9108 /* Build configuration list for PBXNativeTarget "RespirappWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D3F0D3C303F678E00BC9108 /* Debug */,
+				3D3F0D3D303F678E00BC9108 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
