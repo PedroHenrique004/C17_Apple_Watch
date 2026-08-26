@@ -36,7 +36,7 @@ final class HealthKitService: NSObject, HealthKitServiceProtocol {
         configuration.locationType = .unknown
         return configuration
     }
-
+    
     private var heartRateType: HKQuantityType? {
         HKQuantityType.quantityType(forIdentifier: .heartRate)
     }
@@ -52,6 +52,14 @@ final class HealthKitService: NSObject, HealthKitServiceProtocol {
             toShare: [HKQuantityType.workoutType()],
             read: [heartRateType]
         )
+        
+        healthStore.enableBackgroundDelivery(for: heartRateType, frequency: .immediate) { success, error in
+            if let error {
+                print("Erro ao ativar Background Delivery: \(error.localizedDescription)")
+            } else {
+                print("Background Delivery ativado com sucesso!")
+            }
+        }
     }
 
     // MARK: - Start / Stop Workout
@@ -113,18 +121,11 @@ final class HealthKitService: NSObject, HealthKitServiceProtocol {
 
 // MARK: - HKLiveWorkoutBuilderDelegate
 
-// O Delegate recebe atualizações do HKLiveWorkoutBuilder.
 extension HealthKitService: HKLiveWorkoutBuilderDelegate {
 
     func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) {
     }
 
-    /*
-     É chamado quando o Builder recebe novos dados.
-
-     collectedTypes informa quais tipos de dados foram
-     atualizados naquele momento.
-    */
     func workoutBuilder(
         _ workoutBuilder: HKLiveWorkoutBuilder,
         didCollectDataOf collectedTypes: Set<HKSampleType>
@@ -146,13 +147,6 @@ extension HealthKitService: HKLiveWorkoutBuilderDelegate {
             return
         }
 
-        /*
-         HKQuantity representa o valor acompanhado de sua unidade.
-
-         Como queremos BPM, solicitamos o valor em:
-
-         count / minute
-        */
         let bpm = quantity.doubleValue(
             for: HKUnit.count().unitDivided(by: .minute())
         )
