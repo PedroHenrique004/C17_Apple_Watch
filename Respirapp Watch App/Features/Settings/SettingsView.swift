@@ -8,9 +8,9 @@ struct SettingsView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 8) {
-                Title(text: "AJUSTES")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 4)
+//                Title(text: "AJUSTES")
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .padding(.bottom, 4)
 
                 SettingsToggleCard(
                     title: "Notificações",

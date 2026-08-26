@@ -76,7 +76,7 @@ struct HeartRateView: View {
                         viewModel.stop()
                     }
             }
-        }
+        }.navigationTitle("Home")
     }
 }
 
