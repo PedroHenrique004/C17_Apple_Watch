@@ -47,7 +47,7 @@ struct OnboardingView: View {
                         }
                     )
                 case .end:
-                    OnboardingEnd()
+                    AppNavigationView()
                 }
             }
         }

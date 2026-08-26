@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WatchKit
 
 struct OnboardingHaptics: View {
     
@@ -63,11 +64,9 @@ struct OnboardingHaptics: View {
                     MainButton(
                         text: "Continuar",
                         action: {
-                            
-                            //TODO: haptics
-                            
-                            //Isso deve acontecer depois dos haptics
                             if let action = onContinue {
+                                
+                                //Navega para a próxima tela.
                                 action()
                             }
                         },
@@ -81,12 +80,21 @@ struct OnboardingHaptics: View {
             
         }.onAppear{
             opacity = true
-            Task{
-                while !Task.isCancelled {
-                    animate.toggle()
-                    
-                    try? await Task.sleep(for: .seconds(3))
-                }
+        }.task{
+            while !Task.isCancelled {
+                
+                //Animação começa
+                animate.toggle()
+                
+                //Haptic1
+                WKInterfaceDevice.current().play(.click)
+                try? await Task.sleep(for: .seconds(0.5))
+                
+                //Haptic2
+                WKInterfaceDevice.current().play(.click)
+                
+                //Animação espera para repetir
+                try? await Task.sleep(for: .seconds(3))
             }
         }
     }
