@@ -25,6 +25,7 @@ struct ActivityButton: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 22, height: 22)
+                    .opacity(isHighlighted ? 1 : 0.6)
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(text)
@@ -34,7 +35,7 @@ struct ActivityButton: View {
                         .minimumScaleFactor(0.8)
                     Text(subtitle)
                         .font(.system(size: 11, weight: .regular, design: .rounded))
-                        .foregroundStyle(isHighlighted ? theme.accent : .gray)
+                        .foregroundStyle(isHighlighted ? theme.accent : .gray.opacity(0.7))
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                 }

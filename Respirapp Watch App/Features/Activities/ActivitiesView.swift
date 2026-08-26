@@ -5,12 +5,11 @@ struct ActivitiesView: View {
 
     @Environment(ThemeManager.self) private var theme
     /// Pilha de navegação: recebe a atividade selecionada e abre seu detalhe.
-    @State private var path = NavigationPath()
+    @Binding var path: NavigationPath
 
     var body: some View {
         // A navegação é baseada no modelo `Activity`, mantendo a seleção tipada.
-        NavigationStack(path: $path) {
-            ScrollView {
+
                 VStack(alignment: .leading, spacing: 10) {
                     Title(text: "TROCAR AÇÃO")
                     // Cada caso do enum alimenta o mesmo componente reutilizável.
@@ -25,11 +24,8 @@ struct ActivitiesView: View {
                             path.append(activity)
                         }
                     }
-                }
                 .padding(.horizontal, 8)
-                .padding(.vertical, 10)
-            }
-            .background(theme.ground)
+                .padding(.vertical, 2)
             // Evita que tamanhos de acessibilidade muito grandes cortem as quatro ações.
             .dynamicTypeSize(.small ... .large)
             .navigationDestination(for: Activity.self) { activity in
@@ -54,5 +50,7 @@ struct ActivitiesView: View {
 }
 
 #Preview {
-    ActivitiesView().environment(ThemeManager())
+    ActivitiesView(
+        path: .constant(NavigationPath())
+    ).environment(ThemeManager())
 }
