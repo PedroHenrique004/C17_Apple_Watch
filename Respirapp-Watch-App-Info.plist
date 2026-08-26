@@ -2,14 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSHealthShareUsageDescription</key>
-	<string>O app precisa ler seus batimentos cardíacos para detectar sinais de estresse.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>O app precisa registrar exercícios para monitorar os batimentos em segundo plano.</string>
 	<key>UIBackgroundModes</key>
 	<array/>
 	<key>WKBackgroundModes</key>
 	<array>
+		<string>mindfulness</string>
 		<string>workout-processing</string>
 	</array>
 </dict>
