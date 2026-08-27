@@ -8,9 +8,9 @@ struct SettingsView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 8) {
-                Title(text: "AJUSTES")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 4)
+//                Title(text: "AJUSTES")
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .padding(.bottom, 4)
 
                 SettingsToggleCard(
                     title: "Notificações",
@@ -31,7 +31,13 @@ struct SettingsView: View {
                     .foregroundColor(theme.accent.opacity(0.7))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 4)
-                    .padding(.top, 8)
+                    .padding(.vertical, 8)
+                
+                Title(text: "PERSONALIZAR")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 4)
+                
+                SettingsColor(theme: theme)
             }
             .padding(.horizontal, 8)
             .padding(.top, 8)

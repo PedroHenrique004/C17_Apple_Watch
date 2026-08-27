@@ -48,11 +48,22 @@ public extension Color {
 }
 
     //MARK: - Enum das cores
-enum AppTheme {
+enum AppTheme: String, CaseIterable {
     case purple
     case blue
     case rose
     case green
+    
+    var accent: Color {
+            switch self {
+            case .purple: .Pa
+            case .blue: .Ba
+            case .rose: .Ra
+            case .green: .Ga
+
+            }
+
+        }
 }
 
 
@@ -80,7 +91,7 @@ enum AppTheme {
 ///`themeManager.theme = .blue`
 @Observable
 class ThemeManager {
-    var theme: AppTheme = .rose //Por Default será roxo.
+    var theme: AppTheme = UserPreferencesStore.shared.actualColor //Por Default será roxo.
     
     //Cores do fundo
     var ground: Color {

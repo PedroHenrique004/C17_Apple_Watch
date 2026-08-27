@@ -11,7 +11,7 @@ struct ActivitiesView: View {
         // A navegação é baseada no modelo `Activity`, mantendo a seleção tipada.
 
                 VStack(alignment: .leading, spacing: 10) {
-                    Title(text: "TROCAR AÇÃO")
+//                    Title(text: "TROCAR AÇÃO")
                     // Cada caso do enum alimenta o mesmo componente reutilizável.
                     ForEach(Activity.allCases) { activity in
                         ActivityButton(
@@ -35,7 +35,7 @@ struct ActivitiesView: View {
                     closeCompletedExercise()
                 }
             }
-        }
+        }.navigationTitle("Atividades")
     }
 
     /// Fecha o fluxo concluído de uma vez, sem animar as telas intermediárias ao voltar.
