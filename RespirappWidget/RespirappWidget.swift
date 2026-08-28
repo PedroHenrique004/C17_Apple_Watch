@@ -8,7 +8,7 @@
 import WidgetKit
 import SwiftUI
 
-private let AppGroupID = "group.dev.pedrosantos.Respirapp"
+private let AppGroupID = "group.dev.pedrosantos.respirapp-c17"
 
 struct SimpleEntry: TimelineEntry {
     let date: Date

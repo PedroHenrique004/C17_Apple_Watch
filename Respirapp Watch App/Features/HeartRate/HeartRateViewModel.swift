@@ -13,7 +13,7 @@ final class HeartRateViewModel {
     private let notificationService: NotificationServiceProtocol
     private let monitorHeartRateUseCase: MonitorHeartRateUseCaseProtocol
     
-    private let appGroupID = "group.dev.pedrosantos.Respirapp"
+    private let appGroupID = "group.dev.pedrosantos.respirapp-c17"
 
     init(
         healthKitService: HealthKitServiceProtocol = HealthKitService(),
