@@ -88,11 +88,21 @@
 			);
 			target = 3D3F0D28303F678C00BC9108 /* RespirappWidgetExtension */;
 		};
+		3DD6305D30411C6B00BE18B8 /* Exceptions for "Respirapp Watch App" folder in "RespirappWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Core/DesignSystem/DSColors.swift,
+			);
+			target = 3D3F0D28303F678C00BC9108 /* RespirappWidgetExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3D3F09963036234200BC9108 /* Respirapp Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3DD6305D30411C6B00BE18B8 /* Exceptions for "Respirapp Watch App" folder in "RespirappWidgetExtension" target */,
+			);
 			path = "Respirapp Watch App";
 			sourceTree = "<group>";
 		};
