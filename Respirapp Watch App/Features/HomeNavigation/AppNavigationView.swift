@@ -21,6 +21,13 @@ struct AppNavigationView: View {
                     //Tela dos batimentos cardíacos
                     HeartRateView()
                     
+                    //Atalho para a sessão de respiração guiada (WorkoutKit)
+                    NavigationLink {
+                        BreathingWorkoutView()
+                    } label: {
+                        Text("Sessão de Respiração")
+                    }
+                    
                     //Tela das atividades
                     ActivitiesView(path: $path)
                     
@@ -43,7 +50,6 @@ struct AppNavigationView: View {
                     }
         }
     }
-//}
 
 #Preview {
     AppNavigationView()
