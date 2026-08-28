@@ -7,12 +7,30 @@
 		<key>Respirapp Watch App.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>RespirappWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>3D3F098B3036234200BC9108</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3D3F09913036234200BC9108</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3D3F0D28303F678C00BC9108</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

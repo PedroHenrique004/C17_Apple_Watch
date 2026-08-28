@@ -7,8 +7,6 @@
 
 import SwiftUI
 import Foundation
-import Observation
-
 
 //Design System com as cores que serão utilizadas no projeto.
 
@@ -64,62 +62,4 @@ enum AppTheme: String, CaseIterable {
             }
 
         }
-}
-
-
-///Essa classe deve ser utilizada como uma única instância global, definida no arquivo raíz do app.
-///
-///
-///Deve ser instanciada da seguinte maneira:
-///
-///`@State private var colorScheme = ThemeManager()`
-///
-///No começo da hierarquia das views colocamos: `.environment(colorScheme)`
-///
-///Depois, em todas as views que fizerem o uso das cores precisamos colocar:
-///
-///`@Environment(ThemeManager.self) private var theme`
-///
-///Isso que permite utilizar:
-///
-///`themeManager.ground`
-///
-///`themeManager.surface`
-///
-///`themeManager.accent`
-///
-///`themeManager.theme = .blue`
-@Observable
-class ThemeManager {
-    var theme: AppTheme = UserPreferencesStore.shared.actualColor //Por Default será roxo.
-    
-    //Cores do fundo
-    var ground: Color {
-        switch theme {
-        case .purple: return .Pg
-        case .blue: return .Bg
-        case .rose: return .Rg
-        case .green: return .Gg
-        }
-    }
-    
-    //Cores da superfície
-    var surface: Color {
-        switch theme {
-        case .purple: return .Ps
-        case .blue: return .Bs
-        case .rose: return .Rs
-        case .green: return .Gs
-        }
-    }
-    
-    //Cores principais
-    var accent: Color {
-        switch theme {
-        case .purple: return .Pa
-        case .blue: return .Ba
-        case .rose: return .Ra
-        case .green: return .Ga
-        }
-    }
 }
